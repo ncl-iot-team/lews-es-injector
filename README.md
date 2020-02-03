@@ -40,8 +40,8 @@ docker build --tag lews-pipeline-<module name> .
 
 ```bash
 docker run -e KAFKA_BROKER="<kafka-broker-host:port>" \
--e MODULE_SRC_TOPIC="<module name>" \
--e ES_HOST="<source topic for the module>" \
--e ES_INDEX="<target topic for the module>" \
--e ES_DOCTYPE="<elastic search document type>" lews-pipeline-<module name>
+-e MODULE_SRC_TOPIC="<module source topic name>" \
+-e ES_HOST="<elastic search host name>" \
+-e ES_INDEX="<index name>" \
+-e ES_DOCTYPE="<document type (metadata)>" lews-pipeline-<module name>
 ```
