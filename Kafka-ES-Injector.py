@@ -35,7 +35,7 @@ class KafkaElasticSearchInjector(ABC):
         
         print("Initializing Kafka Consumer")
         
-        self.consumer = KafkaConsumer(source_topic,group_id = self.processor_name, kafka_bootstrap_servers = self.kafka_bootstrap_servers,value_deserializer=lambda m: json.loads(m.decode('utf-8')))
+        self.consumer = KafkaConsumer(source_topic,group_id = self.processor_name, bootstrap_servers = self.kafka_bootstrap_servers,value_deserializer=lambda m: json.loads(m.decode('utf-8')))
 
         print("Initializing ES Injector Module")
 
