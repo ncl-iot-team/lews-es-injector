@@ -1,8 +1,18 @@
 from abc import ABC, abstractmethod
-from kafka import KafkaConsumer, KafkaProducer
+from kafka import KafkaConsumer
 import json
 import os
 from elasticsearch import Elasticsearch
+
+kafka_servers = os.environ.get("KAFKA_BOOTSTRAP_SERVERS","localhost:9092").split(",")
+kafka_listen_topic = os.environ.get('KAFKA_LISTEN_TOPIC', 't_topic').split(",")
+es_host = os.environ.get('ES_HOST','elastic.technipun.com')
+es_index = os.environ.get('ES_INDEX','lews-tweets')
+es_doc_type = os.environ.get('ES_DOCTYPE','_doc')
+
+print("Environment variables:")
+print(f"KAFKA_BOOTSTRAP_SERVERS = {kafka_servers}")
+print(f"KAFKA_LISTEN_TOPIC = {kafka_listen_topic}")
 
 class KafkaElasticSearchInjector(ABC):
         
@@ -17,7 +27,7 @@ class KafkaElasticSearchInjector(ABC):
 
         self.es_index = es_index
         
-        self.kafka_bootstrap_servers = os.getenv('KAFKA_BROKER','host.docker.internal:9092')
+        self.kafka_bootstrap_servers = kafka_servers 
         #self.bootstrap_servers = 'localhost:9092'
         
         print("Initializing Kafka Consumer")
@@ -42,10 +52,6 @@ if __name__ == "__main__":
     #processor_name: Unique processor name for the module, 
     #source_topic: Topic from which the module should accept the record to be processed, 
     # target_topic: Topic to which the module publishes the processed record
-   s_topic = os.getenv('MODULE_SRC_TOPIC','lews-twitter')
-   es_host = os.getenv('ES_HOST','elastic.technipun.com')
-   es_index = os.getenv('ES_INDEX','lews-tweets')
-   es_doc_type =os.getenv('ES_DOCTYPE','lews_tweet')
 
    kafka_es_injector = KafkaElasticSearchInjector(s_topic,es_host)
 
