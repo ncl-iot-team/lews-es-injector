@@ -56,7 +56,7 @@ if __name__ == "__main__":
     #source_topic: Topic from which the module should accept the record to be processed, 
     # target_topic: Topic to which the module publishes the processed record
 
-   kafka_es_injector = KafkaElasticSearchInjector(s_topic,es_host)
+   kafka_es_injector = KafkaElasticSearchInjector(kafka_listen_topic,es_host)
 
    for message in kafka_es_injector.consumer:
             try:
