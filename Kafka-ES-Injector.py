@@ -15,7 +15,7 @@ print(f"KAFKA_BOOTSTRAP_SERVERS = {kafka_servers}")
 print(f"KAFKA_LISTEN_TOPIC = {kafka_listen_topic}")
 print(f"ES_HOST = {es_host}")
 print(f"ES_INDEX = {es_index}")
-print(f"ES_DOCTYPE = {es_doc_type})
+print(f"ES_DOCTYPE = {es_doc_type}")
 
 class KafkaElasticSearchInjector(ABC):
         
