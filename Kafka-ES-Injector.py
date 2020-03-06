@@ -59,10 +59,12 @@ if __name__ == "__main__":
    kafka_es_injector = KafkaElasticSearchInjector(kafka_listen_topic,es_host)
 
    for message in kafka_es_injector.consumer:
-            try:
-                kafka_es_injector.index_data(es_index,es_doc_type,message.value)
-            except:
-                print("Skipping Record..")
+        try:
+            payload=message.value
+            print(f"Payload: {payload}")
+            kafka_es_injector.index_data(es_index,es_doc_type,payload)
+        except:
+            print("Skipping Record..")
 
 
 
