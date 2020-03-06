@@ -5,7 +5,7 @@ import os
 from elasticsearch import Elasticsearch
 
 kafka_servers = os.environ.get("KAFKA_BOOTSTRAP_SERVERS","localhost:9092").split(",")
-kafka_listen_topic = os.environ.get('KAFKA_LISTEN_TOPIC', 't_topic').split(",")
+kafka_listen_topic = os.environ.get('KAFKA_LISTEN_TOPIC', 't_topic')
 es_host = os.environ.get('ES_HOST','elastic.technipun.com')
 es_index = os.environ.get('ES_INDEX','lews-tweets')
 es_doc_type = os.environ.get('ES_DOCTYPE','_doc')
