@@ -60,9 +60,11 @@ if __name__ == "__main__":
 
    for message in kafka_es_injector.consumer:
         try:
-            payload=message.value
+            payload_dic=json.loads(message.value)
+            payload=json.dumps(payload_dic)
             print(f"Payload: {payload}")
             kafka_es_injector.index_data(es_index,es_doc_type,payload)
+
         except:
             print("Skipping Record..")
 
