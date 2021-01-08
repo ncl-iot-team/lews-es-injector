@@ -4,11 +4,7 @@ This module injects data from a kafka topic to Elasticsearch
 
 
 ## Running in local environment
-### Install all dependancies
-Install dependancies given in requirements.txt. You may add your dependancies in this file for you module
-```bash
-pip install -r requirements.txt
-```
+
 ### Install and run Kafka Broker
 #### Ubuntu 18.04
 Follow https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-ubuntu-18-04
@@ -25,7 +21,7 @@ pip install -r requirements.txt
 
 Running
 ```bash
-python Kafka-ES-Injector.py
+python es_ingest.py
 ```
 
 ## Running in Docker (Recommended for Production)
@@ -33,14 +29,15 @@ python Kafka-ES-Injector.py
 
 
 ```bash
-docker build --tag lews-pipeline-<module name> .
+docker build --tag lews-es-injector .
 ```
 
 ### Usage
 
 ```bash
-docker run -e KAFKA_BOOTSTRAP_SERVERS="<comma separated kafka-broker-host:port>" \
--e KAFKA_LISTEN_TOPIC="<module name>" \
+docker run -e KAFKA_SOURCE_BOOTSTRAP_SERVERS="<comma separated kafka-broker-host:port>" \
+-e KAFKA_SOURCE_TOPIC="<module name>" \
+-e CONSUMER_GROUP="<consumer group name>" \
 -e ES_HOST="<source topic for the module>" \
 -e ES_INDEX="<target topic for the module>" \
 -e ES_DOCTYPE="<elastic search document type>" lews-pipeline-<module name>
